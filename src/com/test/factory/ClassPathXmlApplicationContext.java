@@ -25,7 +25,11 @@ public class ClassPathXmlApplicationContext implements BeanFactory{
 
             Object existBean = context.get(beanName);
             if(existBean == null && bean.getScope().equals("singleton")){
-                existBean = createBean(bean);
+                // 根据字符串创建Bean对象
+                Object beanObj = createBean(bean);
+
+                // 把创建好的bean对象放置到map中去
+                context.put(beanName, beanObj);
             }
         }
     }
